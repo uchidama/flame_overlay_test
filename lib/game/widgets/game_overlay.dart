@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 
 import '../game_app.dart';
+import '../app/common.dart';
 import 'widgets.dart';
 
 class GameOverlay extends StatefulWidget {
@@ -49,7 +50,7 @@ class GameOverlayState extends State<GameOverlay> {
                       size: 48,
                     ),
               onPressed: () {
-                (widget.game as MyGame).togglePauseState();
+                (widget.game as GameApp).togglePauseState();
                 setState(
                   () {
                     isPaused = !isPaused;
@@ -58,6 +59,20 @@ class GameOverlayState extends State<GameOverlay> {
               },
             ),
           ),
+          Positioned(
+            top: 90,
+            right: 30,
+            child: ElevatedButton(
+              child: const Icon(
+                Icons.settings,
+                size: 48,
+              ),
+              onPressed: () {
+                (widget.game as GameApp).setConfig();
+              },
+            ),
+          ),
+
           // Mobile Support: Add on-screen left & right directional buttons
           if (isPaused)
             Positioned(

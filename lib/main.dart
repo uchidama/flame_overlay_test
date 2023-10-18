@@ -22,7 +22,7 @@ void main() {
   /*
   runApp(
     GameWidget(
-      game: MyGame(),
+      game: GameApp(),
     ),
   );
   */
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MyGame',
+      title: 'GameApp',
       themeMode: ThemeMode.dark,
       theme: ThemeData(
         colorScheme: lightColorScheme,
@@ -44,12 +44,12 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.audiowideTextTheme(ThemeData.dark().textTheme),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Doodle Dash'),
+      home: const MyHomePage(title: 'flame overlay test'),
     );
   }
 }
 
-final MyGame game = MyGame();
+final GameApp game = GameApp();
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -82,8 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 overlayBuilderMap: <String,
                     Widget Function(BuildContext, Game)>{
                   'gameOverlay': (context, game) => GameOverlay(game),
-                  //'mainMenuOverlay': (context, game) => MainMenuOverlay(game),
-                  //'gameOverOverlay': (context, game) => GameOverOverlay(game),
+                  'configOverlay': (context, game) => ConfigOverlay(game),
                 },
               ),
             ),

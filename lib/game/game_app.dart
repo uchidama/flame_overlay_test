@@ -5,15 +5,16 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
-//import 'package:flutter/gestures.dart';
-//import 'package:vector_math/vector_math_64.dart';
+import 'app/common.dart';
+
+RotateDirection rotateDirection = RotateDirection.left;
 
 /// This example simply adds a rotating white square on the screen.
 /// If you press on a square, it will be removed.
 /// If you press anywhere else, another square will be added.
-class MyGame extends FlameGame {
+class GameApp extends FlameGame {
   //with TapCallbacks {
-  MyGame({super.children});
+  GameApp({super.children});
 
   ValueNotifier<int> score = ValueNotifier(0);
 
@@ -21,7 +22,8 @@ class MyGame extends FlameGame {
   Future<void> onLoad() async {
     add(Square(size / 2));
     score.value = 1;
-    overlays.add('gameOverlay');
+    //overlays.add('gameOverlay');
+    overlays.add('configOverlay');
   }
 
   @override
@@ -53,6 +55,26 @@ class MyGame extends FlameGame {
       pauseEngine();
     }
   }
+
+  void setRotateDirection(RotateDirection direction) {
+    rotateDirection = direction;
+  }
+
+  void setConfig() {
+    overlays.remove('gameOverlay');
+    overlays.add('configOverlay');
+  }
+
+  RotateDirection? getRotateDirection() {
+    return rotateDirection;
+  }
+
+  void startGame() {
+    //initializeGameStart();
+    //gameManager.state = GameState.playing;
+    overlays.remove('configOverlay');
+    overlays.add('gameOverlay');
+  }
 }
 
 class Square extends RectangleComponent with TapCallbacks {
@@ -73,7 +95,16 @@ class Square extends RectangleComponent with TapCallbacks {
   @override
   void update(double dt) {
     super.update(dt);
-    angle += speed * dt;
+
+    switch (rotateDirection) {
+      case RotateDirection.left:
+        angle -= speed * dt;
+        break;
+      case RotateDirection.right:
+        angle += speed * dt;
+        break;
+    }
+    //angle += speed * dt;
     angle %= 2 * math.pi;
   }
 
