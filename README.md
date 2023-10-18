@@ -2,6 +2,9 @@
 
 A new Flutter project.
 
+This project is based on [Small sample game in flame example](https://github.com/flame-engine/flame/tree/main/packages/flame/example).  
+It added an overlay system for [this game code](https://codelabs.developers.google.com/codelabs/flutter-flame-game?hl=ja#9).
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
